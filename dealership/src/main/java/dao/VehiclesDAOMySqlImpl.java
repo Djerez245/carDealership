@@ -19,6 +19,45 @@ public class VehiclesDAOMySqlImpl implements VehiclesDAO {
 
 
     @Override
+    public ArrayList<Vehicle> findAllVehicle() {
+        ArrayList<Vehicle> allVehicles = new ArrayList<>();
+        int vin;
+        int year;
+        String make;
+        String model;
+        String vehicleType;
+        String color;
+        int odometer;
+        double price;
+        boolean sold;
+
+        try (Connection connection = dataSource.getConnection()){
+            PreparedStatement statement = connection.prepareStatement("""
+                    SELECT * FROM vehicles;
+                    """);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()){
+                vin = rs.getInt("vin");
+                year = rs.getInt("year");
+                make = rs.getString("make");
+                model = rs.getString("model");
+                vehicleType = rs.getString("type");
+                color = rs.getString("color");
+                odometer = rs.getInt("odometer");
+                price = rs.getDouble("price");
+                sold = rs.getBoolean("sold");
+
+                Vehicle v = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price, sold);
+                allVehicles.add(v);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return allVehicles;
+    }
+
+    @Override
     public ArrayList<Vehicle> findVehicleByMake(String make) {
         ArrayList<Vehicle> vehicleByMake = new ArrayList<>();
         int vin;
