@@ -4,7 +4,7 @@ import com.pluralsight.Vehicle;
 
 import java.util.ArrayList;
 
-public interface vehiclesDAO {
+public interface VehiclesDAO {
     public ArrayList<Vehicle> findVehicleByMake(String make);
     public ArrayList<Vehicle> findVehicleByModel(String model);
     public ArrayList<Vehicle> findVehicleByColor(String color);

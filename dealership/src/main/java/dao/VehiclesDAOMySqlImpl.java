@@ -9,11 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class vehiclesDAOMySqlImpl implements vehiclesDAO {
+public class VehiclesDAOMySqlImpl implements VehiclesDAO {
 
     DataSource dataSource;
 
-    public vehiclesDAOMySqlImpl(DataSource dataSource) {
+    public VehiclesDAOMySqlImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
