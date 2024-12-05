@@ -35,6 +35,7 @@ public class DealershipDAOMySqlImpl implements DealershipDAO {
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()){
+                id = rs.getInt("id");
                 businessName = rs.getString("name");
                 address = rs.getString("address");
                 phone = rs.getString("phone");
@@ -43,7 +44,7 @@ public class DealershipDAOMySqlImpl implements DealershipDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return new Dealership(businessName, phone, address);
+        return new Dealership(id, businessName, phone, address);
     }
 
     @Override
@@ -66,7 +67,7 @@ public class DealershipDAOMySqlImpl implements DealershipDAO {
                 address = rs.getString("address");
                 phone = rs.getString("phone");
 
-                Dealership d = new Dealership(businessName, address, phone);
+                Dealership d = new Dealership(id, businessName, address, phone);
                 dealerships.add(d);
             }
 

@@ -13,6 +13,6 @@ public interface vehiclesDAO {
     public ArrayList<Vehicle> findVehiclesByPriceRange(double minPrice, double maxPrice);
     public ArrayList<Vehicle> findVehiclesByMileage(int minOdometer, int maxOdometer);
     public ArrayList<Vehicle> findVehicleByYear(int year);
-    public void addVehicle();
-    public void removeVehicle();
+    public void addVehicle(Vehicle v);
+    public void removeVehicle(int vin);
 }

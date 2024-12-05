@@ -28,6 +28,7 @@ public class vehiclesDAOMySqlImpl implements vehiclesDAO {
         String color;
         int odometer;
         double price;
+        boolean sold;
 
         try (Connection connection = dataSource.getConnection()){
             PreparedStatement statement = connection.prepareStatement("""
@@ -40,13 +41,15 @@ public class vehiclesDAOMySqlImpl implements vehiclesDAO {
             while (rs.next()){
                 vin = rs.getInt("vin");
                 year = rs.getInt("year");
+                make = rs.getString("make");
                 model = rs.getString("model");
                 vehicleType = rs.getString("type");
                 color = rs.getString("color");
                 odometer = rs.getInt("odometer");
                 price = rs.getDouble("price");
+                sold = rs.getBoolean("sold");
 
-                Vehicle v = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+                Vehicle v = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price, sold);
                 vehicleByMake.add(v);
             }
         } catch (SQLException e) {
@@ -65,6 +68,7 @@ public class vehiclesDAOMySqlImpl implements vehiclesDAO {
         String color;
         int odometer;
         double price;
+        boolean sold;
 
         try (Connection connection = dataSource.getConnection()){
             PreparedStatement statement = connection.prepareStatement("""
@@ -78,12 +82,14 @@ public class vehiclesDAOMySqlImpl implements vehiclesDAO {
                 vin = rs.getInt("vin");
                 year = rs.getInt("year");
                 make = rs.getString("make");
+                model = rs.getString("model");
                 vehicleType = rs.getString("type");
                 color = rs.getString("color");
                 odometer = rs.getInt("odometer");
                 price = rs.getDouble("price");
+                sold = rs.getBoolean("sold");
 
-                Vehicle v = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+                Vehicle v = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price, sold);
                 vehicleByModel.add(v);
             }
         } catch (SQLException e) {
@@ -102,6 +108,7 @@ public class vehiclesDAOMySqlImpl implements vehiclesDAO {
         String vehicleType;
         int odometer;
         double price;
+        boolean sold;
 
         try (Connection connection = dataSource.getConnection()){
             PreparedStatement statement = connection.prepareStatement("""
@@ -117,10 +124,12 @@ public class vehiclesDAOMySqlImpl implements vehiclesDAO {
                 make = rs.getString("make");
                 model = rs.getString("model");
                 vehicleType = rs.getString("type");
+                color = rs.getString("color");
                 odometer = rs.getInt("odometer");
                 price = rs.getDouble("price");
+                sold = rs.getBoolean("sold");
 
-                Vehicle v = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+                Vehicle v = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price, sold);
                 vehicleByColor.add(v);
             }
         } catch (SQLException e) {
@@ -139,6 +148,7 @@ public class vehiclesDAOMySqlImpl implements vehiclesDAO {
         String color;
         int odometer;
         double price;
+        boolean sold;
 
         try (Connection connection = dataSource.getConnection()){
             PreparedStatement statement = connection.prepareStatement("""
@@ -149,6 +159,7 @@ public class vehiclesDAOMySqlImpl implements vehiclesDAO {
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()){
+                vin = rs.getInt("vin");
                 year = rs.getInt("year");
                 make = rs.getString("make");
                 model = rs.getString("model");
@@ -156,8 +167,9 @@ public class vehiclesDAOMySqlImpl implements vehiclesDAO {
                 color = rs.getString("color");
                 odometer = rs.getInt("odometer");
                 price = rs.getDouble("price");
+                sold = rs.getBoolean("sold");
 
-                Vehicle v = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+                Vehicle v = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price, sold);
                 vehicleByVin.add(v);
             }
         } catch (SQLException e) {
@@ -176,6 +188,7 @@ public class vehiclesDAOMySqlImpl implements vehiclesDAO {
         String color;
         int odometer;
         double price;
+        boolean sold;
 
         try (Connection connection = dataSource.getConnection()){
             PreparedStatement statement = connection.prepareStatement("""
@@ -190,11 +203,13 @@ public class vehiclesDAOMySqlImpl implements vehiclesDAO {
                 year = rs.getInt("year");
                 make = rs.getString("make");
                 model = rs.getString("model");
+                vehicleType = rs.getString("type");
                 color = rs.getString("color");
                 odometer = rs.getInt("odometer");
                 price = rs.getDouble("price");
+                sold = rs.getBoolean("sold");
 
-                Vehicle v = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+                Vehicle v = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price, sold);
                 vehicleByType.add(v);
             }
         } catch (SQLException e) {
@@ -214,6 +229,7 @@ public class vehiclesDAOMySqlImpl implements vehiclesDAO {
         String color;
         int odometer;
         double price;
+        boolean sold;
 
         try (Connection connection = dataSource.getConnection()){
             PreparedStatement statement = connection.prepareStatement("""
@@ -233,8 +249,9 @@ public class vehiclesDAOMySqlImpl implements vehiclesDAO {
                 color = rs.getString("color");
                 odometer = rs.getInt("odometer");
                 price = rs.getDouble("price");
+                sold = rs.getBoolean("sold");
 
-                Vehicle v = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+                Vehicle v = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price, sold);
                 vehicleByPrice.add(v);
             }
         } catch (SQLException e) {
@@ -254,6 +271,7 @@ public class vehiclesDAOMySqlImpl implements vehiclesDAO {
         String color;
         int odometer;
         double price;
+        boolean sold;
 
         try (Connection connection = dataSource.getConnection()){
             PreparedStatement statement = connection.prepareStatement("""
@@ -273,8 +291,9 @@ public class vehiclesDAOMySqlImpl implements vehiclesDAO {
                 color = rs.getString("color");
                 odometer = rs.getInt("odometer");
                 price = rs.getDouble("price");
+                sold = rs.getBoolean("sold");
 
-                Vehicle v = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+                Vehicle v = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price, sold);
                 vehicleByMileage.add(v);
             }
         } catch (SQLException e) {
@@ -293,6 +312,7 @@ public class vehiclesDAOMySqlImpl implements vehiclesDAO {
         String color;
         int odometer;
         double price;
+        boolean sold;
 
         try (Connection connection = dataSource.getConnection()){
             PreparedStatement statement = connection.prepareStatement("""
@@ -311,8 +331,9 @@ public class vehiclesDAOMySqlImpl implements vehiclesDAO {
                 color = rs.getString("color");
                 odometer = rs.getInt("odometer");
                 price = rs.getDouble("price");
+                sold = rs.getBoolean("sold");
 
-                Vehicle v = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+                Vehicle v = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price, sold);
                 vehicleByYear.add(v);
             }
         } catch (SQLException e) {
@@ -322,13 +343,56 @@ public class vehiclesDAOMySqlImpl implements vehiclesDAO {
     }
 
     @Override
-    public void addVehicle(){
+    public void addVehicle(Vehicle v){
+        try (Connection connection = dataSource.getConnection()) {
+            int vin = 0;
+            int year = 0;
+            String make = "";
+            String model = "";
+            String vehicleType = "";
+            String color = "";
+            int odometer = 0;
+            double price = 0.0;
+            boolean sold = false;
 
+            PreparedStatement statement = connection.prepareStatement("""
+                    INSERT INTO vehicles VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+                    """);
+
+            statement.setInt(1, vin);
+            statement.setInt(2, year);
+            statement.setString(3, make);
+            statement.setString(4, model);
+            statement.setString(5, vehicleType);
+            statement.setString(6, color);
+            statement.setInt(7, odometer);
+            statement.setDouble(8, price);
+            statement.setBoolean(9, sold);
+
+            int rowsAffected = statement.executeUpdate();
+            System.out.println(rowsAffected + "rows inserted");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public void removeVehicle() {
+    public void removeVehicle(int vin) {
 
+        try (Connection connection = dataSource.getConnection()){
+            PreparedStatement statement = connection.prepareStatement("""
+                    DELETE FROM vehicles WHERE vin = ?;
+                    """);
+
+            statement.setInt(1, vin);
+
+            int rowsAffected = statement.executeUpdate();
+            System.out.println(rowsAffected + "rows inserted");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
