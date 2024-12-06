@@ -4,13 +4,9 @@ public class LeaseContract extends Contract{
 double expectedEndingValue;
 double leaseFee;
 
-    public LeaseContract(String dateOfContract, String customerName, String customerEmail, Vehicle vehicleSold) {
-
-        super(dateOfContract, customerName, customerEmail, vehicleSold);
-        this.expectedEndingValue = expectedEndingValue;
-        this.leaseFee = leaseFee;
+    public LeaseContract(String dateOfContract, String firstName, String lastName, String customerEmail, Vehicle vehicleSold) {
+        super(dateOfContract, firstName, lastName, customerEmail, vehicleSold);
     }
-
 
     public double getExpectedEndingValue() {
         expectedEndingValue = vehicleSold.getPrice() / 2;
@@ -31,7 +27,7 @@ double leaseFee;
     }
 
     public String toString(){
-        return String.format("LEASE|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%.2f|%.2f|%.2f|%.2f|%.2f\n", dateOfContract, customerName, customerEmail, vehicleSold.getVin(),
+        return String.format("LEASE|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%.2f|%.2f|%.2f|%.2f|%.2f\n", dateOfContract, firstName, customerEmail, vehicleSold.getVin(),
                 vehicleSold.getYear(), vehicleSold.getMake(), vehicleSold.getModel(), vehicleSold.getVehicleType(), vehicleSold.getColor(),
                 vehicleSold.getOdometer(), vehicleSold.getPrice(), getExpectedEndingValue(), getLeaseFee(), getTotalPrice(), getMonthlyPayment());
     }

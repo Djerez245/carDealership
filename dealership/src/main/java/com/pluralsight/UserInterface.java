@@ -1,5 +1,7 @@
 package com.pluralsight;
 
+import dao.AdminUserDAO;
+import dao.AdminUserDAOMysqlImpl;
 import dao.VehiclesDAOMySqlImpl;
 import org.apache.commons.dbcp2.BasicDataSource;
 
@@ -18,33 +20,33 @@ public class UserInterface {
     private static void displayMenu() {
         System.out.println("""
                 
-  =======================================
-       WELCOME TO D & B USED CARS
-  =======================================
-  (0)     TO BUY/LEASE A NEW CAR
-  (1)        FIND A VEHICLE
-  (2)      LIST ALL VEHICLES
-  (3)        ADD A VEHICLE
-  (4)       REMOVE A VEHICLE
-  (5)       EXIT DEALERSHIP
+                =======================================
+                     WELCOME TO D & B USED CARS
+                =======================================
+                (0)     TO BUY/LEASE A NEW CAR
+                (1)        FIND A VEHICLE
+                (2)      LIST ALL VEHICLES
+                (3)        ADD A VEHICLE
+                (4)       REMOVE A VEHICLE
+                (5)       EXIT DEALERSHIP
                 """);
     }
 
     private static void displaySearchMenu() {
         System.out.println("""
                 
-=======================================
-          SEARCH FOR A VEHICLE
-=======================================
-(1)        SEARCH BY MAKE
-(2)        SEARCH BY MODEL
-(3)        SEARCH BY COLOR
-(4)         SEARCH BY VIN
-(5)     SEARCH BY VEHICLE TYPE
-(6)       SEARCH BY MILEAGE
-(7)        SEARCH BY PRICE
-(8)        SEARCH BY YEAR
-(0)              EXIT
+                =======================================
+                          SEARCH FOR A VEHICLE
+                =======================================
+                (1)        SEARCH BY MAKE
+                (2)        SEARCH BY MODEL
+                (3)        SEARCH BY COLOR
+                (4)         SEARCH BY VIN
+                (5)     SEARCH BY VEHICLE TYPE
+                (6)       SEARCH BY MILEAGE
+                (7)        SEARCH BY PRICE
+                (8)        SEARCH BY YEAR
+                (0)              EXIT
                 """);
     }
 
@@ -192,7 +194,7 @@ public class UserInterface {
         Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, mileage, price, sold);
         dealership.addVehicle(vehicle);
         vDao.addVehicle(vehicle);
-            System.out.println("\nVEHICLE ADDED!");
+        System.out.println("\nVEHICLE ADDED!");
 
     }
 
@@ -205,15 +207,16 @@ public class UserInterface {
     }
 
 //    private void buyOrLeaseCar() throws IOException {
-//        DealershipFileManager fileManager = new DealershipFileManager();
-//        Contract c = null;
-//        ContractDataManager dataManager = new ContractDataManager();
+//        AdminUserDAO aDao = new AdminUserDAOMysqlImpl(ds);
+//
 //        System.out.println("WOULD LIKE TO BUY OR LEASE A VEHICLE: ");
 //        String leaseOrBuy = scanner.nextLine();
 //        System.out.println("PLEASE ENTER TODAY'S DATE (YYYYMMDD): ");
 //        String date = scanner.nextLine();
-//        System.out.println("PLEASE ENTER YOUR NAME: ");
-//        String buyerName = scanner.nextLine();
+//        System.out.println("PLEASE ENTER YOUR FIRST NAME: ");
+//        String buyerFirstName = scanner.nextLine();
+//        System.out.println("PLEASE ENTER YOUR FIRST NAME: ");
+//        String buyerLastName = scanner.nextLine();
 //        System.out.println("PLEASE ENTER YOUR EMAIL: ");
 //        String buyerEmail = scanner.nextLine();
 //        System.out.println("ENTER THE VIN OF THE VEHICLE WOULD YOU LIKE TO PURCHASE: ");
@@ -223,16 +226,20 @@ public class UserInterface {
 //            System.out.println("WOULD YOU LIKE TO FINANCE THE VEHICLE?");
 //            System.out.println("PLEASE ENTER 'YES' OR 'NO': ");
 //            String yesOrNo = scanner.nextLine();
-//            c = new SalesContract(date, buyerName, buyerEmail, dealership.getVehicleByVin(purchasedCar).get(0), yesOrNo);
-//        } else if (leaseOrBuy.equalsIgnoreCase("lease")) {
-//            c = new LeaseContract(date, buyerName, buyerEmail, dealership.getVehicleByVin(purchasedCar).get(0));
-//        }
-//        dataManager.saveContract(c);
-//        for (Vehicle v : dealership.getAllVehicles()){
-//            if(v.getVin() == purchasedCar){
-//                dealership.removeVehicle(v);
-//                fileManager.saveDealership(dealership);
+//            boolean userResponse = true;
+//            if (yesOrNo.equalsIgnoreCase("YES")) {
+//                userResponse = true;
+//
+//            } else if (yesOrNo.equalsIgnoreCase("NO")) {
+//                userResponse = false;
 //            }
+//
+//            SalesContract sc = new SalesContract(date, buyerFirstName, buyerLastName, buyerEmail, vDao.findVehicleByVin(purchasedCar), userResponse);
+//            aDao.addSale(sc);
+//
+//        } else if (leaseOrBuy.equalsIgnoreCase("lease")) {
+//            LeaseContract lc = new LeaseContract(date, buyerFirstName, buyerLastName, buyerEmail, vDao.findVehicleByVin(purchasedCar));
+//            aDao.addLease(lc);
 //        }
 //    }
 

@@ -427,7 +427,7 @@ public class VehiclesDAOMySqlImpl implements VehiclesDAO {
             statement.setInt(1, vin);
 
             int rowsAffected = statement.executeUpdate();
-            System.out.println(rowsAffected + "rows inserted");
+            System.out.println(rowsAffected + "rows affected");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

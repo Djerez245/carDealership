@@ -4,15 +4,11 @@ public class SalesContract extends Contract {
     private double salesTaxAmount = .05;
     private double recordingFee = 100;
     private double processingFee;
-    private String ifWantToFinance;
+    private boolean ifWantToFinance;
 
 
-    public SalesContract(String dateOfContract, String customerName, String customerEmail, Vehicle vehicleSold, String ifWantToFinance) {
-
-        super(dateOfContract, customerName, customerEmail, vehicleSold);
-        this.salesTaxAmount = salesTaxAmount;
-        this.recordingFee = recordingFee;
-        this.processingFee = processingFee;
+    public SalesContract(String dateOfContract, String firstName, String lastName, String customerEmail, Vehicle vehicleSold,boolean ifWantToFinance) {
+        super(dateOfContract, firstName, lastName, customerEmail, vehicleSold);
         this.ifWantToFinance = ifWantToFinance;
     }
 
@@ -46,16 +42,16 @@ public class SalesContract extends Contract {
         this.processingFee = processingFee;
     }
 
-    public String getIfWantToFinance() {
+    public boolean isIfWantToFinance() {
         return ifWantToFinance;
     }
 
-    public void setIfWantToFinance(String ifWantToFinance) {
+    public void setIfWantToFinance(boolean ifWantToFinance) {
         this.ifWantToFinance = ifWantToFinance;
     }
 
     public String toString() {
-        return String.format("SALE|%s|%s|%s|%d|%d|%s|%s|%s|%s|%d|%s|%.2f|%.2f|%.2f|%.2f|%s|%.2f\n", dateOfContract, customerName, customerEmail, vehicleSold.getVin(), vehicleSold.getYear(), vehicleSold.getMake(),
+        return String.format("SALE|%s|%s|%s|%d|%d|%s|%s|%s|%s|%d|%s|%.2f|%.2f|%.2f|%.2f|%s|%.2f\n", dateOfContract, firstName, customerEmail, vehicleSold.getVin(), vehicleSold.getYear(), vehicleSold.getMake(),
                 vehicleSold.getModel(), vehicleSold.getVehicleType(), vehicleSold.getColor(), vehicleSold.getOdometer(), vehicleSold.getPrice(),
                 salesTaxAmount, getTotalPrice(), getProcessingFee(), recordingFee, ifWantToFinance, getMonthlyPayment());
     }
@@ -68,7 +64,7 @@ public class SalesContract extends Contract {
 
     @Override
     public double getMonthlyPayment() {
-        if (ifWantToFinance.equalsIgnoreCase("no")){
+        if (!ifWantToFinance){
             monthlyPayment = 0;
         }
         else if (vehicleSold.getPrice() >= 10000) {
