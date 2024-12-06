@@ -65,7 +65,7 @@ public class UserInterface {
             int userInput = scanner.nextInt();
             scanner.nextLine();
             switch (userInput) {
-                case 0 -> System.out.println("not done"); //buyOrLeaseCar();
+                case 0 -> buyOrLeaseCar();
                 case 1 -> showSearchMenu();
                 case 2 -> printVehicleList(vDao.findAllVehicle());
                 case 3 -> addCar(scanner);
@@ -206,42 +206,41 @@ public class UserInterface {
         vDao.removeVehicle(vin);
     }
 
-//    private void buyOrLeaseCar() throws IOException {
-//        AdminUserDAO aDao = new AdminUserDAOMysqlImpl(ds);
-//
-//        System.out.println("WOULD LIKE TO BUY OR LEASE A VEHICLE: ");
-//        String leaseOrBuy = scanner.nextLine();
-//        System.out.println("PLEASE ENTER TODAY'S DATE (YYYYMMDD): ");
-//        String date = scanner.nextLine();
-//        System.out.println("PLEASE ENTER YOUR FIRST NAME: ");
-//        String buyerFirstName = scanner.nextLine();
-//        System.out.println("PLEASE ENTER YOUR FIRST NAME: ");
-//        String buyerLastName = scanner.nextLine();
-//        System.out.println("PLEASE ENTER YOUR EMAIL: ");
-//        String buyerEmail = scanner.nextLine();
-//        System.out.println("ENTER THE VIN OF THE VEHICLE WOULD YOU LIKE TO PURCHASE: ");
-//        int purchasedCar = scanner.nextInt();
-//        scanner.nextLine();
-//        if (leaseOrBuy.equalsIgnoreCase("buy")) {
-//            System.out.println("WOULD YOU LIKE TO FINANCE THE VEHICLE?");
-//            System.out.println("PLEASE ENTER 'YES' OR 'NO': ");
-//            String yesOrNo = scanner.nextLine();
-//            boolean userResponse = true;
-//            if (yesOrNo.equalsIgnoreCase("YES")) {
-//                userResponse = true;
-//
-//            } else if (yesOrNo.equalsIgnoreCase("NO")) {
-//                userResponse = false;
-//            }
-//
-//            SalesContract sc = new SalesContract(date, buyerFirstName, buyerLastName, buyerEmail, vDao.findVehicleByVin(purchasedCar), userResponse);
-//            aDao.addSale(sc);
-//
-//        } else if (leaseOrBuy.equalsIgnoreCase("lease")) {
-//            LeaseContract lc = new LeaseContract(date, buyerFirstName, buyerLastName, buyerEmail, vDao.findVehicleByVin(purchasedCar));
-//            aDao.addLease(lc);
-//        }
-//    }
+    private void buyOrLeaseCar() throws IOException {
+        AdminUserDAO aDao = new AdminUserDAOMysqlImpl(ds);
+
+        System.out.println("WOULD LIKE TO BUY OR LEASE A VEHICLE: ");
+        String leaseOrBuy = scanner.nextLine();
+        System.out.println("PLEASE ENTER TODAY'S DATE (YYYYMMDD): ");
+        String date = scanner.nextLine();
+        System.out.println("PLEASE ENTER YOUR FIRST NAME: ");
+        String buyerFirstName = scanner.nextLine();
+        System.out.println("PLEASE ENTER YOUR FIRST NAME: ");
+        String buyerLastName = scanner.nextLine();
+        System.out.println("PLEASE ENTER YOUR EMAIL: ");
+        String buyerEmail = scanner.nextLine();
+        System.out.println("ENTER THE VIN OF THE VEHICLE WOULD YOU LIKE TO PURCHASE: ");
+        int purchasedCar = scanner.nextInt();
+        scanner.nextLine();
+        if (leaseOrBuy.equalsIgnoreCase("buy")) {
+            System.out.println("WOULD YOU LIKE TO FINANCE THE VEHICLE?");
+            System.out.println("PLEASE ENTER 'YES' OR 'NO': ");
+            String yesOrNo = scanner.nextLine();
+            boolean userResponse = true;
+            if (yesOrNo.equalsIgnoreCase("YES")) {
+                userResponse = true;
+
+            } else if (yesOrNo.equalsIgnoreCase("NO")) {
+                userResponse = false;
+            }
+            SalesContract sc = new SalesContract(date, buyerFirstName, buyerLastName, buyerEmail, vDao.findVehicleByVin(purchasedCar).get(0), userResponse);
+            aDao.addSale(sc);
+
+        } else if (leaseOrBuy.equalsIgnoreCase("lease")) {
+            LeaseContract lc = new LeaseContract(date, buyerFirstName, buyerLastName, buyerEmail, vDao.findVehicleByVin(purchasedCar).get(0));
+            aDao.addLease(lc);
+        }
+    }
 
 }
 
